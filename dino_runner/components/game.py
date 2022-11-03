@@ -10,7 +10,7 @@ from dino_runner.utils import text_utils
 
 
 class Game:
-
+    Max_lives = 3
     def __init__(self):
         pygame.init()
         pygame.display.set_caption(TITLE)
@@ -24,6 +24,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.points = 0 
+        self.lives = self.Max_lives
 
     def run(self):
         # Game loop: events - update - draw
@@ -43,7 +44,7 @@ class Game:
         dino_event = pygame.key.get_pressed()
         self.dinosaur.update(dino_event)
         self.obstacle_handler.update(self.game_speed, self.dinosaur)
-
+        self.update_score
 
 
     def draw(self):
@@ -66,9 +67,14 @@ class Game:
          self.x_pos_bg -= self.game_speed
 
     def draw_score(self):
-        self.points += 1
+        
         message = "Points: " + str(self.points)
         points_text, points_rect = text_utils.get_text_element(message, SCREEN_WIDTH - 100, 70 )
         self.screen.blit(points_text, points_rect)
+
+    def update_score(self):
+        self.points += 1
+        if self.points % 100 == 0: 
+            self.game_speed += 1
 
         
