@@ -43,9 +43,11 @@ class Game:
     def update(self):
         dino_event = pygame.key.get_pressed()
         self.dinosaur.update(dino_event)
-        self.obstacle_handler.update(self.game_speed, self.dinosaur)
+        self.obstacle_handler.update(self.game_speed, self.dinosaur, self.lives)
         self.update_score
 
+        if self.lives == 0:
+            self.playing = False
 
     def draw(self):
         self.clock.tick(FPS)
