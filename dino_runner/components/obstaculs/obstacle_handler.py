@@ -15,7 +15,7 @@ class Obstaclehandler():
             if dino.image_rect.colliderect(obstacle.image_rect):
                 pygame.time.delay(300)
                 self.obstacles.pop()
-
+                self.lives -= 1 
 
             if obstacle.image_rect.x < -obstacle.image_rect.width:
                 self.obstacles.pop()
