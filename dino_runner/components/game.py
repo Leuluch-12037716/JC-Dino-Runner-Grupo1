@@ -9,7 +9,7 @@ from dino_runner.components.obstaculs.obstacle_handler import Obstaclehandler
 from dino_runner.utils import text_utils
 
 from dino_runner.components.cloud import Cloud
-
+from dino_runner.components.heart import Heart
 
 class Game:
     Max_lives = 3
@@ -22,13 +22,14 @@ class Game:
         self.dinosaur = Dinosaur()
         self.obstacle_handler = Obstaclehandler()
         self.cloud = Cloud()
+        self.heart = Heart()
         self.playing = False
         self.running = True
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.points = 0 
-        self.lives = self.Max_lives
+        self.lives = self.Max_lives        
 
     def execute(self):
         while self.running:
@@ -49,6 +50,7 @@ class Game:
         self.dinosaur = Dinosaur()
         self.obstacle_handler = Obstaclehandler()
         self.cloud = Cloud()
+        self.heart = Heart()
         self.points = 0 
         self.lives = self.Max_lives
 
@@ -63,6 +65,7 @@ class Game:
         self.dinosaur.update(dino_event)
         self.obstacle_handler.update(self)
         self.cloud.update(self)
+        self.heart.update(self.lives)
         self.update_score()
 
         if self.lives == 0:
@@ -75,6 +78,7 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.draw_background()
         self.cloud.draw(self.screen)
+        self.heart.draw(self.screen)
         self.dinosaur.draw(self.screen)
         self.obstacle_handler.draw(self.screen)
         self.draw_score()
