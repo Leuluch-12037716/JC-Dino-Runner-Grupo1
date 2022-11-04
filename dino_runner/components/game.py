@@ -20,20 +20,34 @@ class Game:
         self.dinosaur = Dinosaur()
         self.obstacle_handler = Obstaclehandler()
         self.playing = False
+        self.running = True
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.points = 0 
         self.lives = self.Max_lives
 
+    def execute(self):
+        while self.running:
+            if not self.playing:
+                self.show_menu()
+
     def run(self):
         # Game loop: events - update - draw
-        self.playing = True
+        self.reset_attributes()
         while self.playing:
             self.events()
             self.update()
             self.draw()
         pygame.quit()
+
+    def reset_attributes(self):
+        self.playing = True
+        self.dinosaur = Dinosaur()
+        self.obstacle_handler = Obstaclehandler()
+        self.points = 0 
+        self.lives = self.Max_lives
+
 
     def events(self):
         for event in pygame.event.get():
@@ -48,6 +62,8 @@ class Game:
 
         if self.lives == 0:
             self.playing = False
+            self.running = True
+            self.execute()
 
     def draw(self):
         self.clock.tick(FPS)
@@ -77,4 +93,26 @@ class Game:
         self.points += 1
         if self.points % 100 == 0: 
             self.game_speed += 1
+
+    def show_menu(self):
+        self.running = True
+
+        black_color = (0, 0, 0)
+        self.screen.fill(black_color)
+        self.show_menu_option()
+        pygame.display.update()
         
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.playing = False
+                self.running = False
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                self.run()
+
+    def show_menu_option(self):
+        white_color = (250, 250, 250)
+        text, text_rect = text_utils.get_text_element("Press any key to Start", font_size= 40, font_color = white_color)
+        self.screen.blit(text, text_rect)
