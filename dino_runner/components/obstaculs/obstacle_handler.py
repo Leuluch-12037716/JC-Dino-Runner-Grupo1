@@ -6,8 +6,8 @@ from dino_runner.components.obstaculs.bird import Bird
 import random
 
 
-
 class Obstaclehandler():
+
     def __init__(self):
         self.obstacles = []
     
