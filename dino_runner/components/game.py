@@ -43,7 +43,7 @@ class Game:
     def update(self):
         dino_event = pygame.key.get_pressed()
         self.dinosaur.update(dino_event)
-        self.obstacle_handler.update(self.game_speed, self.dinosaur, self.lives)
+        self.obstacle_handler.update(self)
         self.update_score()
 
         if self.lives == 0:
