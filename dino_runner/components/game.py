@@ -54,7 +54,7 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.draw_background()
         self.dinosaur.draw(self.screen)
-        #self.obstacle_handler.draw(self.screen)
+        self.obstacle_handler.draw(self.screen)
         self.draw_score()
         pygame.display.update()
         pygame.display.flip()
@@ -69,7 +69,7 @@ class Game:
          self.x_pos_bg -= self.game_speed
 
     def draw_score(self):
-        message = "Points: " + str(self.points)
+        message = "Points: " +  str(self.points)
         points_text, points_rect = text_utils.get_text_element(message, SCREEN_WIDTH - 100, 70 )
         self.screen.blit(points_text, points_rect)
 
