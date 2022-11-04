@@ -114,5 +114,9 @@ class Game:
 
     def show_menu_option(self):
         white_color = (250, 250, 250)
-        text, text_rect = text_utils.get_text_element("Press any key to Start", font_size= 40, font_color = white_color)
+        if self.points > 0: 
+            text, text_rect = text_utils.get_text_element("Game over! Press any key if you wanna play again ", font_size= 40, font_color = white_color)
+        else: 
+            text, text_rect = text_utils.get_text_element("Press any key to Start", font_size= 40, font_color = white_color)
+
         self.screen.blit(text, text_rect)
