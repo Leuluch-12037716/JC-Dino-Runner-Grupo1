@@ -7,7 +7,7 @@ class Obstaclehandler():
     def __init__(self):
         self.obstacles = []
     
-    def update(self, speed, dino): 
+    def update(self, speed, dino, lives): 
         if len(self.obstacles) == 0:
             self.obstacles.append(Cactus(SMALL_CACTUS))
         for obstacle in self.obstacles:
@@ -15,6 +15,7 @@ class Obstaclehandler():
             if dino.image_rect.colliderect(obstacle.image_rect):
                 pygame.time.delay(300)
                 self.obstacles.pop()
+                lives -= 1
 
 
             if obstacle.image_rect.x < -obstacle.image_rect.width:
