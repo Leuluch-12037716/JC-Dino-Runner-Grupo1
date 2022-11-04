@@ -43,8 +43,8 @@ class Game:
     def update(self):
         dino_event = pygame.key.get_pressed()
         self.dinosaur.update(dino_event)
-        self.obstacle_handler.update(self.game_speed, self.dinosaur)
-        #self.update_score()
+        self.obstacle_handler.update(self.game_speed, self.dinosaur, self.lives)
+        self.update_score()
 
         if self.lives == 0:
             self.playing = False
@@ -55,7 +55,7 @@ class Game:
         self.draw_background()
         self.dinosaur.draw(self.screen)
         #self.obstacle_handler.draw(self.screen)
-        #self.draw_score()
+        self.draw_score()
         pygame.display.update()
         pygame.display.flip()
 
@@ -68,14 +68,13 @@ class Game:
              self.x_pos_bg = 0
          self.x_pos_bg -= self.game_speed
 
-    # def draw_score(self):
-    #     self.points += 1
-    #     if self.points % 100 == 0: 
-    #         self.game_speed += 1
-    #     message = "Points: " + str(self.points)
-    #     points_text, points_rect = text_utils.get_text_element(message, SCREEN_WIDTH - 100, 70 )
-    #     self.screen.blit(points_text, points_rect)
+    def draw_score(self):
+        message = "Points: " + str(self.points)
+        points_text, points_rect = text_utils.get_text_element(message, SCREEN_WIDTH - 100, 70 )
+        self.screen.blit(points_text, points_rect)
 
-    # def update_score(self):
-    #     pass
+    def update_score(self):
+        self.points += 1
+        if self.points % 100 == 0: 
+            self.game_speed += 1
         
